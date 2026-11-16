@@ -18,7 +18,6 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (market-scan; +https://github.com/orangeai
 # ---- 固定清單 -------------------------------------------------------------
 INDICES = {
     "^TWII": "台灣加權指數",
-    "^TWOII": "櫃買指數",
     "^GSPC": "標普500指數",
     "^IXIC": "那斯達克指數",
     "^SOX": "費城半導體指數",

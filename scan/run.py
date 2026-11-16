@@ -12,10 +12,12 @@ from zoneinfo import ZoneInfo
 import numpy as np
 import pandas as pd
 
-from . import fetch, indicators, screens, universe
+from . import fetch, indicators, screens, twse, universe
 
 log = logging.getLogger("scan")
 TPE = ZoneInfo("Asia/Taipei")
+NY = ZoneInfo("America/New_York")
+US_INDEX = {"^GSPC", "^IXIC", "^SOX", "^DJI"}
 PARTIAL_GROUPS = {"期貨商品", "外匯", "加密貨幣"}  # 24 小時或跨時區交易，最後一根可能未收完
 STOCK_GROUPS = {"台股", "美股"}
 BENCH = {"台股": "^TWII", "美股": "^GSPC", "美股ETF": "^GSPC"}
@@ -66,13 +68,31 @@ def main():
     daily, failed = fetch.download(uni["symbol"].tolist(), period="2y", interval="1d")
     log.info("daily ok=%d failed=%d", len(daily), len(failed))
 
+    # ---- 台股：用證交所/櫃買官方資料補上 Yahoo 尚未更新的最新一日 ------------------
+    tw_daily = {s: d for s, d in daily.items() if s.endswith((".TW", ".TWO"))}
+    official, official_note = twse.latest_official_bars()
+    patched = twse.patch(tw_daily, official)
+    daily.update(tw_daily)
+    log.info("official TW patch: %s; patched %d", official_note, len(patched))
+
     # ---- 移除未收完的最後一根 -------------------------------------------------
     partial_info = {}
-    today_utc = now_utc.date()
+    now_ny = now_utc.astimezone(NY)
     for sym, df in list(daily.items()):
+        if not len(df):
+            continue
         g = meta_of[sym]["group"]
-        if g in PARTIAL_GROUPS and len(df) and df.index[-1].date() >= today_utc:
-            partial_info[sym] = {"date": str(df.index[-1].date()), "price": float(df["Close"].iloc[-1])}
+        last = df.index[-1].date()
+        if g in PARTIAL_GROUPS:
+            is_partial = last >= now_utc.date()
+        elif g == "台股" or sym == "^TWII":
+            is_partial = last == now_tpe.date() and (now_tpe.hour, now_tpe.minute) < (13, 45)
+        elif g in ("美股", "美股ETF") or sym in US_INDEX:
+            is_partial = last == now_ny.date() and (now_ny.hour, now_ny.minute) < (16, 15)
+        else:
+            is_partial = False
+        if is_partial:
+            partial_info[sym] = {"date": str(last), "price": float(df["Close"].iloc[-1])}
             daily[sym] = df.iloc[:-1]
 
     # ---- 流動性篩選(股票依 20 日平均成交值) ----------------------------------
@@ -201,6 +221,17 @@ def main():
         ds = [daily[s].index[-1].date() for s in daily if meta_of[s]["group"] == g and len(daily[s])]
         if ds:
             last_dates[g] = str(pd.Series(ds).mode().iloc[0])
+    def expected(now_local, close_hm):
+        d = now_local.date()
+        if now_local.weekday() >= 5 or (now_local.hour, now_local.minute) < close_hm:
+            d = d - pd.Timedelta(days=1)
+        while d.weekday() >= 5:
+            d = d - pd.Timedelta(days=1)
+        return str(d)
+
+    exp = {"台股": expected(now_tpe, (13, 45)), "美股": expected(now_ny, (16, 15))}
+    stale = {g: f"最後日期 {last_dates.get(g)} 早於預期 {e}(可能是假日，或資料源尚未更新)"
+             for g, e in exp.items() if last_dates.get(g) and last_dates[g] < e}
     meta = {
         "generated_at_taipei": now_tpe.strftime("%Y-%m-%d %H:%M"),
         "generated_at_utc": now_utc.strftime("%Y-%m-%d %H:%M"),
@@ -212,9 +243,13 @@ def main():
         "failed_daily": failed,
         "failed_60m": failed_60m,
         "last_bar_date_by_group": last_dates,
+        "expected_last_date": exp,
+        "stale_warning": stale,
+        "tw_official_patch": {"note": official_note, "patched_count": len(patched)},
         "partial_bars_removed": partial_info,
         "notes": [
             "期貨、外匯、加密貨幣若最後一根日K尚未收完，已移除不納入判斷，最新價見 partial_bars_removed。",
+            "台股最新一日若 Yahoo 未更新，會以證交所/櫃買中心 OpenAPI 官方收盤資料補上(tw_official_patch)。",
             "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
             "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
             "60分K 時間為台北時間。",

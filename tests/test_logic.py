@@ -41,3 +41,16 @@ def test_analyse_runs_all_regimes():
 def test_short_history():
     r = screens.analyse(indicators.add_all(make(n=100)))
     assert r["trend_long"]["mode"].startswith("簡化版")
+
+
+def test_twse_parse_and_patch():
+    from datetime import date
+    from scan import twse
+    assert twse.parse_date("1151116") == date(2026, 11, 16)
+    assert twse.parse_date("115/11/16") == date(2026, 11, 16)
+    assert twse.parse_date("20261116") == date(2026, 11, 16)
+    df = make(n=100)
+    nxt = df.index[-1] + pd.Timedelta(days=3)
+    d = {"2330.TW": df}
+    patched = twse.patch(d, {"2330.TW": (nxt.date(), {"Open": 1, "High": 2, "Low": 0.5, "Close": 1.5, "Volume": 9})})
+    assert patched == ["2330.TW"] and d["2330.TW"]["Close"].iloc[-1] == 1.5 and len(d["2330.TW"]) == 101
