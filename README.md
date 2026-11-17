@@ -31,6 +31,7 @@ Yahoo Finance(yfinance)。日K 為分割調整、未還原除權息。期貨／�
 |---|---|
 | `meta.json` | 產生時間、各類別最後一根日K日期、失敗代號、移除的未完成 K 棒 |
 | `candidates.md` / `candidates.json` | 前 15 名候選(每類最多 6 個)與完整判斷細節 |
+| `alerts.json` | 極端軌道提醒：最新一根觸及極端下軌(跌過頭)/上軌(漲過頭)的標的與趨勢解讀(也列在 candidates.md 最後) |
 | `screen_all.csv` | 所有分析標的的摘要 |
 | `key_symbols.json` | 加權、標普、那斯達克、費半、小那、黃金、原油、台幣、比特幣最新收盤 |
 | `bars/*_D.csv` `*_W.csv` `*_60m.csv` | 候選與關鍵指標的日K(260根)、週K(104根)、60分K(300根,台北時間)含指標 |
