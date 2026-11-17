@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 import numpy as np
 import pandas as pd
 
-from . import fetch, indicators, screens, twse, universe
+from . import chips, fetch, indicators, screens, twse, universe
 
 log = logging.getLogger("scan")
 TPE = ZoneInfo("Asia/Taipei")
@@ -117,6 +117,17 @@ def main():
             results[sym] = screens.analyse(e, bench)
         except Exception as ex:  # noqa: BLE001
             log.warning("analyse %s failed: %s", sym, ex)
+
+    # ---- 台股籌碼(三大法人、融資融券;由 scan.chips 每晚更新，這裡用到前一交易日為止) ----
+    chip_hist = chips.load(out / "chips" / "tw_chips.csv")
+    chip_date = chip_hist.date.max() if len(chip_hist) else None
+    if len(chip_hist):
+        by_sym = dict(tuple(chip_hist.groupby("symbol")))
+        for sym, r in results.items():
+            if sym in by_sym and sym in enriched:
+                vol20 = float(enriched[sym]["Volume"].tail(20).mean())
+                r["chips"] = chips.features(by_sym[sym], sym, vol20)
+    log.info("chips: %s rows, last date %s", len(chip_hist), chip_date)
 
     # ---- 相對強度(63 日報酬相對基準，於同類中排百分位) ---------------------
     def ret(sym, n=63):
@@ -247,6 +258,10 @@ def main():
                      "rs_pct_in_group": r.get("rs_pct_in_group"), "rs_lead_recent": r.get("rs_lead_recent"),
                      "breakout_failed": r.get("breakout_failed"),
                      "rail_upper": r["extreme_rails"]["upper"], "rail_lower": r["extreme_rails"]["lower"],
+                     "trust_streak": (r.get("chips") or {}).get("trust_streak"),
+                     "foreign_streak": (r.get("chips") or {}).get("foreign_streak"),
+                     "inst_5d_pct_vol": (r.get("chips") or {}).get("inst_5d_pct_vol"),
+                     "margin_5d_chg_pct": (r.get("chips") or {}).get("margin_5d_chg_pct"),
                      "bars": r["bars"]})
     pd.DataFrame(flat).sort_values("score", ascending=False).to_csv(latest / "screen_all.csv", index=False)
 
@@ -277,6 +292,7 @@ def main():
         "failed_daily": failed,
         "failed_60m": failed_60m,
         "last_bar_date_by_group": last_dates,
+        "chips_last_date": chip_date,
         "expected_last_date": exp,
         "stale_warning": stale,
         "tw_official_patch": {"note": official_note, "patched_count": len(patched)},
@@ -287,6 +303,7 @@ def main():
             "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
             "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
             "60分K 時間為台北時間。",
+            "chips:台股三大法人(股)與融資融券(張),由 scan.chips 每晚 21:40 更新，掃描時使用前一交易日為止的資料;目前僅顯示、未計分。",
             "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分;全部觸及上下軌的標的另列於 alerts.json 與 candidates.md 的「極端軌道提醒」。",
             "rs_lead_recent:近 5 根內出現 RS 領先(S02);突破前 10 根內出現者加 1 分。breakout_failed:突破後收盤曾跌回突破點或 EMA20(S03),僅標記不計分(回測差異不顯著)。",
         ],
@@ -302,6 +319,18 @@ def main():
         lines.append(f"| {i} | {c['symbol']} {c['name']} | {c['group']} | {c['direction']} | {c['stage']} | "
                      f"{c['score']} | {c['close']} | {c['pivot']} | {c['dist_to_pivot_pct']} | "
                      f"{'、'.join(c['reasons'])} |")
+    tw_c = [c for c in candidates if c.get("chips")]
+    lines += ["", f"## 台股候選籌碼(資料日期 {chip_date or '無'};法人單位：張;連買為正、連賣為負;僅供參考，未計分)", ""]
+    if tw_c:
+        lines += ["| 商品 | 外資 | 投信 | 自營 | 外資連續日 | 投信連續日 | 5日法人合計佔量% | 5日投信佔量% | 融資餘額 | 融資5日% | 券資比% |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|"]
+        for c in tw_c:
+            k = {kk: ("-" if vv is None else vv) for kk, vv in c["chips"].items()}
+            lines.append(f"| {c['symbol']} {c['name']} | {k['foreign_lots']} | {k['trust_lots']} | {k['dealer_lots']} | "
+                         f"{k['foreign_streak']} | {k['trust_streak']} | {k['inst_5d_pct_vol']} | {k['trust_5d_pct_vol']} | "
+                         f"{k['margin_bal']} | {k['margin_5d_chg_pct']} | {k['short_margin_ratio_pct']} |")
+    else:
+        lines.append("無籌碼資料(data/chips/tw_chips.csv 尚未建立)。")
     for side in ("跌過頭", "漲過頭"):
         items = [a for a in alerts if a["type"] == side][:15]
         lines += ["", f"## 極端軌道提醒：{side}(最新一根觸及{'下' if side == '跌過頭' else '上'}軌,共 "
