@@ -77,3 +77,34 @@ def test_breakout_failed():
     assert screens.breakout_failed(df, {"found": True, "bars_ago": 2, "level": df["Close"].iloc[-1:].max() + 1}, "long")
     assert not screens.breakout_failed(df, {"found": True, "bars_ago": 0, "level": lvl}, "long")
     assert not screens.breakout_failed(df, {"found": False}, "long")
+
+
+def test_chips_parse_and_features(monkeypatch, tmp_path):
+    import json
+    from datetime import date
+    from pathlib import Path
+    from scan import chips
+    fx = Path(__file__).parent / "fixtures"
+    m = {"T86": "twse_t86", "MI_MARGN": "twse_marg", "dailyTrade": "tpex_inst", "balance": "tpex_marg"}
+    monkeypatch.setattr(chips, "_get", lambda url, **k: json.load(open(fx / (next(v for kk, v in m.items() if kk in url) + ".json"))))
+    monkeypatch.setattr(chips, "TWSE_SLEEP", 0)
+    monkeypatch.setattr(chips, "TPEX_SLEEP", 0)
+    df = chips.fetch_day(date(2026, 11, 16))
+    assert list(df.columns) == chips.COLS
+    r = df.set_index("symbol").loc["2891.TW"]
+    assert r.total == 5781191 and r.foreign == 6100235 and r.trust == -4075000 and r.margin_bal == 2018
+    r = df.set_index("symbol").loc["3324.TWO"]
+    assert r.total == 734142 and r.margin_chg == -366
+    # features:連續天數與融資 5 日變化
+    rows = []
+    for i, d in enumerate(pd.bdate_range("2026-10-01", periods=8)):
+        rows.append({"date": d.strftime("%Y-%m-%d"), "symbol": "X.TW", "foreign": -1, "trust": 1000 if i >= 5 else -5,
+                     "dealer": 0, "total": 1, "margin_bal": 100 + i * 10, "margin_chg": 10, "short_bal": 5, "short_chg": 0})
+    h = pd.DataFrame(rows)
+    f = chips.features(h, "X.TW", 1000.0)
+    assert f["trust_streak"] == 3 and f["foreign_streak"] == -8
+    assert f["margin_5d_chg_pct"] == round((170 / 120 - 1) * 100, 2)
+    p = tmp_path / "c.csv"
+    chips.save(h, p)
+    assert len(chips.load(p)) == 8
+    assert chips.features(h, "X.TW", 1000.0, asof="2026-10-05")["trust_streak"] == -3
