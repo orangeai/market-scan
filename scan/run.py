@@ -194,6 +194,35 @@ def main():
     candidates = [card(s) for s in picked]
     (latest / "candidates.json").write_text(dumps(candidates))
 
+    # ---- 極端軌道提醒(S06):最新一根觸及極端下軌(跌過頭)或上軌(漲過頭) --------------
+    # 回測(docs/backtest_2026-11.md):空頭股觸及下軌後 20 日平均 +5.6%(隨機日 +2.7%),反彈風險高;
+    # Stage 2 股觸及下軌 5 日平均 +1.6%(隨機 +0.9%),可留意拉回買點。
+    def trend_label(r):
+        if r["trend_long"]["ok"]:
+            return "長多"
+        if r["trend_short"]["ok"]:
+            return "空頭"
+        return "盤整/其他"
+
+    alerts = []
+    for s, r in results.items():
+        rails = r.get("extreme_rails") or {}
+        for side, key_, rail in (("跌過頭", "touch_lower", "lower"), ("漲過頭", "touch_upper", "upper")):
+            if rails.get(key_) and rails.get(rail):
+                t = trend_label(r)
+                if side == "跌過頭":
+                    note = ("空頭超跌：反彈風險高，空單勿追、可考慮回補" if t == "空頭"
+                            else "長多拉回到極端下軌：留意止跌後的買點" if t == "長多" else "超跌：觀察是否止跌")
+                else:
+                    note = ("長多加速：已偏離均線，勿追高、可考慮分批停利" if t == "長多"
+                            else "空頭急彈到極端上軌：留意反彈結束" if t == "空頭" else "急漲：留意拉回")
+                alerts.append({"symbol": s, "name": meta_of[s]["name"], "group": meta_of[s]["group"],
+                               "type": side, "trend": t, "close": r["close"], "rail": rails[rail],
+                               "m23": rails.get("m23"), "dist_pct": round((r["close"] / rails[rail] - 1) * 100, 2),
+                               "note": note})
+    alerts.sort(key=lambda a: (a["type"] != "跌過頭", a["dist_pct"] if a["type"] == "跌過頭" else -a["dist_pct"]))
+    (latest / "alerts.json").write_text(dumps(alerts))
+
     key = []
     for s in universe.KEY_SYMBOLS:
         if s in daily and len(daily[s]) > 1:
@@ -258,7 +287,7 @@ def main():
             "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
             "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
             "60分K 時間為台北時間。",
-            "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分。",
+            "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分;全部觸及上下軌的標的另列於 alerts.json 與 candidates.md 的「極端軌道提醒」。",
             "rs_lead_recent:近 5 根內出現 RS 領先(S02);突破前 10 根內出現者加 1 分。breakout_failed:突破後收盤曾跌回突破點或 EMA20(S03),僅標記不計分(回測差異不顯著)。",
         ],
         "params": {"near_pivot_pct": 3, "fresh_bars": 3, "fresh_max_pct": 5, "breakout_vol_x": 1.5,
@@ -273,12 +302,23 @@ def main():
         lines.append(f"| {i} | {c['symbol']} {c['name']} | {c['group']} | {c['direction']} | {c['stage']} | "
                      f"{c['score']} | {c['close']} | {c['pivot']} | {c['dist_to_pivot_pct']} | "
                      f"{'、'.join(c['reasons'])} |")
+    for side in ("跌過頭", "漲過頭"):
+        items = [a for a in alerts if a["type"] == side][:15]
+        lines += ["", f"## 極端軌道提醒：{side}(最新一根觸及{'下' if side == '跌過頭' else '上'}軌,共 "
+                  f"{sum(a['type'] == side for a in alerts)} 檔，列前 15)", ""]
+        if not items:
+            lines.append("今日無。")
+            continue
+        lines += ["| 商品 | 類別 | 趨勢 | 收盤 | 極端軌道 | 收盤距軌道% | 23日線 | 提醒 |", "|---|---|---|---|---|---|---|---|"]
+        lines += [f"| {a['symbol']} {a['name']} | {a['group']} | {a['trend']} | {a['close']} | {a['rail']} | "
+                  f"{a['dist_pct']} | {a['m23']} | {a['note']} |" for a in items]
     lines += ["", "資料日期(各類別最後一根日K):", ""] + [f"- {g}: {d}" for g, d in last_dates.items()]
     (latest / "candidates.md").write_text("\n".join(lines) + "\n")
 
     hist = out / "history" / now_tpe.strftime("%Y-%m-%d")
     hist.mkdir(parents=True, exist_ok=True)
     (hist / "candidates.json").write_text(dumps(candidates))
+    (hist / "alerts.json").write_text(dumps(alerts))
     (hist / "key_symbols.json").write_text(dumps(key))
     (hist / "meta.json").write_text(dumps(meta))
     dates = sorted(p.name for p in (out / "history").iterdir() if p.is_dir())
