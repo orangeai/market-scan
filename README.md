@@ -24,6 +24,7 @@ Yahoo Finance(yfinance)。日K 為分割調整、未還原除權息。期貨／�
 - RS 領先(S02):個股/大盤比值創 20 日新高但股價未創高、Stage 2、通過大盤壓力測試;突破前 10 根內出現 +1 分
 - 極端軌道(S06):23 日線 ± 過去 60 日最大偏離;空方候選當根觸及下軌 -2 分(超跌不追空),多方只標記
 - 突破失敗(S03):突破後收盤跌回突破點或 EMA20,只標記(`breakout_failed`)
+- 台股籌碼(三大法人、融資融券):`python -m scan.chips --update` 每晚更新;歷史補抓用 Actions 的 tw-chips 手動執行並填 backfill_days;回測 `python -m backtest.chips_study`
 - 以上三項的回測依據見 `docs/backtest_2026-11.md`(`python -m backtest.feature_study` 可重跑)
 
 ## 輸出(`data/latest/`)
@@ -32,6 +33,7 @@ Yahoo Finance(yfinance)。日K 為分割調整、未還原除權息。期貨／�
 | `meta.json` | 產生時間、各類別最後一根日K日期、失敗代號、移除的未完成 K 棒 |
 | `candidates.md` / `candidates.json` | 前 15 名候選(每類最多 6 個)與完整判斷細節 |
 | `alerts.json` | 極端軌道提醒：最新一根觸及極端下軌(跌過頭)/上軌(漲過頭)的標的與趨勢解讀(也列在 candidates.md 最後) |
+| `../chips/tw_chips.csv` | 台股觀察池每日三大法人買賣超(股)與融資融券餘額(張),由 `tw-chips` workflow 每晚 21:40 更新;candidates.md 有「台股候選籌碼」表(目前僅顯示、未計分) |
 | `screen_all.csv` | 所有分析標的的摘要 |
 | `key_symbols.json` | 加權、標普、那斯達克、費半、小那、黃金、原油、台幣、比特幣最新收盤 |
 | `bars/*_D.csv` `*_W.csv` `*_60m.csv` | 候選與關鍵指標的日K(260根)、週K(104根)、60分K(300根,台北時間)含指標 |
