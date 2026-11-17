@@ -1,5 +1,10 @@
 """型態篩選：趨勢模板、VCP、Squeeze、均線糾結、量縮、Pocket Pivot、突破/跌破、階段分級與評分。
 
+2026-11 新增(來源：使用者 Pine v6 點餐式指標，經 5 年事件回測後採用，見 docs/backtest_2026-11.md):
+- S02 RS 領先：個股/大盤比值創 20 日新高、股價本身未創 20 日新高、Stage 2、通過大盤壓力測試
+- S06 極端軌道：23 日線 ± 過去 60 日最大偏離
+- S03 突破失敗：突破後收盤跌回突破點或 EMA20
+
 所有判斷只用已收盤的 K 棒(呼叫端負責移除未完成的最後一根)。
 """
 from __future__ import annotations
@@ -14,6 +19,7 @@ FRESH_BARS = 3         # 剛發動：突破 3 根 K 棒內
 FRESH_MAX = 0.05       # 剛發動：距突破點 5% 以內
 BREAK_VOL = 1.5        # 放量：成交量 >= 50 日均量 1.5 倍
 LOOKBACK_PIVOT = 20    # 突破/跌破參考：前 20 日高/低
+RS_LEAD_WINDOW = 10    # 突破前幾根內出現 RS 領先才加分
 
 
 def _f(x):
@@ -177,8 +183,52 @@ def breakout(df: pd.DataFrame, vol_ok: bool, direction: str) -> dict:
     return {"found": False}
 
 
-def analyse(df: pd.DataFrame) -> dict:
-    """單一商品的完整篩選結果(df 需已含 indicators.add_all 欄位)。"""
+def rs_lead(df: pd.DataFrame, bench: pd.Series | None) -> pd.Series | None:
+    """S02(耀哥 RS-V2):RS 比值創 20 日新高、股價未創 20 日新高、Stage 2、大盤壓力測試通過。
+
+    壓力測試：大盤 5 日未下跌，或個股 5 日跌幅不超過 2%。
+    """
+    if bench is None or len(df) < 220:
+        return None
+    b = bench.reindex(df.index).ffill()
+    if b.isna().all():
+        return None
+    c, h = df["Close"], df["High"]
+    rs = c / b
+    rs_nh = rs >= rs.rolling(20, min_periods=20).max()
+    px_nh = h >= h.shift(1).rolling(20, min_periods=20).max()
+    stg2 = ((c > df["MA150"]) & (c > df["MA200"]) & (df["MA150"] > df["MA200"])
+            & (df["MA200"] > df["MA200"].shift(20)) & (df["MA50"] > df["MA150"]))
+    stress = ~(b < b.shift(5)) | (c > c.shift(5) * 0.98)
+    return (rs_nh & ~px_nh & stg2 & stress).fillna(False)
+
+
+def extreme_rails(df: pd.DataFrame) -> dict:
+    """S06 極端軌道：23 日線 ± 過去 60 根(不含當根)最大的向上/向下偏離。"""
+    if len(df) < 85:
+        return {"m23": None, "upper": None, "lower": None, "touch_upper": False, "touch_lower": False}
+    c, h, l = df["Close"], df["High"], df["Low"]
+    m23 = c.rolling(23).mean()
+    upper = m23 + (h - m23).rolling(60).max().shift(1)
+    lower = m23 - (m23 - l).rolling(60).max().shift(1)
+    return {"m23": _f(m23.iloc[-1]), "upper": _f(upper.iloc[-1]), "lower": _f(lower.iloc[-1]),
+            "touch_upper": bool(h.iloc[-1] > upper.iloc[-1]), "touch_lower": bool(l.iloc[-1] < lower.iloc[-1])}
+
+
+def breakout_failed(df: pd.DataFrame, bo: dict, direction: str) -> bool:
+    """S03 突破失敗：突破(跌破)後的收盤跌回(站回)突破點，或跌破(站上)EMA20。"""
+    if not bo.get("found") or bo["bars_ago"] == 0:
+        return False
+    after = df.iloc[len(df) - bo["bars_ago"]:]
+    ema20 = df["Close"].ewm(span=20, adjust=False).mean().iloc[len(df) - bo["bars_ago"]:]
+    lvl = bo["level"]
+    if direction == "long":
+        return bool(((after["Close"] < lvl) | (after["Close"] < ema20)).any())
+    return bool(((after["Close"] > lvl) | (after["Close"] > ema20)).any())
+
+
+def analyse(df: pd.DataFrame, bench: pd.Series | None = None) -> dict:
+    """單一商品的完整篩選結果(df 需已含 indicators.add_all 欄位;bench 為對應大盤收盤價，可省略)。"""
     r = df.iloc[-1]
     vol_ok = has_volume(df)
     sw = swings(df)
@@ -198,6 +248,10 @@ def analyse(df: pd.DataFrame) -> dict:
 
     v = vcp(df, sw, vol_ok)
     pp = pocket_pivot(df, vol_ok)
+
+    lead = rs_lead(df, bench)
+    lead_now = bool(lead.tail(5).any()) if lead is not None else None
+    rails = extreme_rails(df)
 
     hh20 = df["High"].iloc[-LOOKBACK_PIVOT - 1:-1].max()
     ll20 = df["Low"].iloc[-LOOKBACK_PIVOT - 1:-1].min()
@@ -236,6 +290,8 @@ def analyse(df: pd.DataFrame) -> dict:
         "kd": {"k": _f(r["K9"]), "d": _f(r["D9"])},
         "atr14": _f(r["ATR14"]),
         "vol_ratio": _f(r["Volume"] / r["VOL_MA50"]) if vol_ok and r["VOL_MA50"] else None,
+        "rs_lead_recent": lead_now,
+        "extreme_rails": rails,
         "swing_points": [{"date": str(df.index[i].date()), "price": _f(p), "type": t} for i, p, t in sw[-8:]],
     }
 
@@ -266,6 +322,19 @@ def analyse(df: pd.DataFrame) -> dict:
             score += 2; reasons.append("Pocket Pivot")
         if bo["found"]:
             score += 2; reasons.append("放量突破" if vol_ok else "突破(無量能資料)")
+            # S02:突破前 RS_LEAD_WINDOW 根內曾出現 RS 領先 → +1(回測：平均 R +0.33 vs +0.25)
+            if lead is not None:
+                i_bo = len(df) - 1 - bo["bars_ago"]
+                if lead.iloc[max(0, i_bo - RS_LEAD_WINDOW):i_bo].any():
+                    score += 1; reasons.append("突破前 RS 領先")
+            # S03:突破後跌回只標記不計分(回測差異不顯著，t≈-1.4,見 docs)
+            if breakout_failed(df, bo, "long"):
+                reasons.append("突破後曾跌回突破點/EMA20(未計分)")
+                res["breakout_failed"] = True
+        elif lead_now:
+            reasons.append("RS 領先(未計分)")
+        if rails["touch_upper"]:
+            reasons.append("觸及極端上軌(未計分)")
         prox = r["Close"] / r["HIGH_52W"] if r["HIGH_52W"] else 0
         score += 2 if prox >= 0.95 else 1 if prox >= 0.85 else 0
     elif direction == "short":
@@ -292,6 +361,12 @@ def analyse(df: pd.DataFrame) -> dict:
             score += 2; reasons.append("剛轉空")
         if bo["found"]:
             score += 2; reasons.append("放量跌破" if vol_ok else "跌破(無量能資料)")
+            if breakout_failed(df, bo, "short"):
+                reasons.append("跌破後曾站回跌破點/EMA20(未計分)")
+                res["breakout_failed"] = True
+        # S06:當根觸及極端下軌(超跌)不追空 → -2(回測：平均 R -0.34 vs -0.18,t=-3.0)
+        if rails["touch_lower"]:
+            score -= 2; reasons.append("觸及極端下軌(超跌，不追空)")
         prox = r["LOW_52W"] / r["Close"] if r["Close"] and r["LOW_52W"] else 0
         score += 1 if prox >= 0.9 else 0
 
@@ -306,6 +381,7 @@ def analyse(df: pd.DataFrame) -> dict:
             score += 1; reasons.append("量縮")
         score += {"蓄勢": 3, "剛發動": 2, "已延伸": -3}.get(stage, 0)
 
+    res.setdefault("breakout_failed", False)
     res["stage"] = stage
     res["pivot"] = _f(pivot)
     res["dist_to_pivot_pct"] = _f((pivot / r["Close"] - 1) * 100) if pivot else None

@@ -54,3 +54,26 @@ def test_twse_parse_and_patch():
     d = {"2330.TW": df}
     patched = twse.patch(d, {"2330.TW": (nxt.date(), {"Open": 1, "High": 2, "Low": 0.5, "Close": 1.5, "Volume": 9})})
     assert patched == ["2330.TW"] and d["2330.TW"]["Close"].iloc[-1] == 1.5 and len(d["2330.TW"]) == 101
+
+
+def test_rs_lead_and_rails():
+    df = indicators.add_all(make(drift=0.002))
+    bench = make(drift=0.0, seed=1)["Close"]
+    lead = screens.rs_lead(df, bench)
+    assert lead is not None and lead.dtype == bool and len(lead) == len(df)
+    # RS 領先當根，股價不可同時創 20 日新高
+    hh = df["High"].shift(1).rolling(20).max()
+    assert not (lead & (df["High"] >= hh)).any()
+    assert screens.rs_lead(df, None) is None
+    rails = screens.extreme_rails(df)
+    assert rails["lower"] < rails["m23"] < rails["upper"]
+    r = screens.analyse(df, bench)
+    assert "rs_lead_recent" in r and "extreme_rails" in r and "breakout_failed" in r
+
+
+def test_breakout_failed():
+    df = indicators.add_all(make(n=300))
+    lvl = float(df["Close"].iloc[-3])
+    assert screens.breakout_failed(df, {"found": True, "bars_ago": 2, "level": df["Close"].iloc[-1:].max() + 1}, "long")
+    assert not screens.breakout_failed(df, {"found": True, "bars_ago": 0, "level": lvl}, "long")
+    assert not screens.breakout_failed(df, {"found": False}, "long")

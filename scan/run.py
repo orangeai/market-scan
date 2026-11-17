@@ -112,7 +112,9 @@ def main():
         try:
             e = indicators.add_all(df)
             enriched[sym] = e
-            results[sym] = screens.analyse(e)
+            b = BENCH.get(meta_of[sym]["group"])
+            bench = daily[b]["Close"] if b and b in daily and b != sym else None
+            results[sym] = screens.analyse(e, bench)
         except Exception as ex:  # noqa: BLE001
             log.warning("analyse %s failed: %s", sym, ex)
 
@@ -213,7 +215,10 @@ def main():
                      "ma_tangle": r["ma_tangle"], "pocket_pivot": r["pocket_pivot"]["recent"],
                      "rsi14": r["rsi14"], "k9": r["kd"]["k"], "d9": r["kd"]["d"],
                      "macd_hist": r["macd"]["hist"], "pct_from_52w_high": r["pct_from_52w_high"],
-                     "rs_pct_in_group": r.get("rs_pct_in_group"), "bars": r["bars"]})
+                     "rs_pct_in_group": r.get("rs_pct_in_group"), "rs_lead_recent": r.get("rs_lead_recent"),
+                     "breakout_failed": r.get("breakout_failed"),
+                     "rail_upper": r["extreme_rails"]["upper"], "rail_lower": r["extreme_rails"]["lower"],
+                     "bars": r["bars"]})
     pd.DataFrame(flat).sort_values("score", ascending=False).to_csv(latest / "screen_all.csv", index=False)
 
     last_dates = {}
@@ -253,6 +258,8 @@ def main():
             "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
             "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
             "60分K 時間為台北時間。",
+            "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分。",
+            "rs_lead_recent:近 5 根內出現 RS 領先(S02);突破前 10 根內出現者加 1 分。breakout_failed:突破後收盤曾跌回突破點或 EMA20(S03),僅標記不計分(回測差異不顯著)。",
         ],
         "params": {"near_pivot_pct": 3, "fresh_bars": 3, "fresh_max_pct": 5, "breakout_vol_x": 1.5,
                    "min_score": MIN_SCORE, "top_n": TOP_N, "max_per_group": MAX_PER_GROUP},
