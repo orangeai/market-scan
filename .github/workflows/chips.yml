@@ -1,0 +1,45 @@
+name: tw-chips
+
+on:
+  schedule:
+    - cron: "40 13 * * 1-5"  # 台北時間 週一至週五 21:40(融資融券約 21:00 後公布)
+  workflow_dispatch:
+    inputs:
+      backfill_days:
+        description: "往回補抓的日曆天數(0 = 只補到今天;730 ≈ 2 年，約需 1.5–2 小時)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tw-chips
+  cancel-in-progress: false
+
+jobs:
+  chips:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Fetch chips
+        run: |
+          if [ "${{ github.event.inputs.backfill_days || '0' }}" != "0" ]; then
+            python -m scan.chips --backfill-days "${{ github.event.inputs.backfill_days }}" --max-minutes 320
+          else
+            python -m scan.chips --update
+          fi
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/chips
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "chips: $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M')"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && break; sleep 10; done
