@@ -33,7 +33,7 @@ Yahoo Finance(yfinance)。日K 為分割調整、未還原除權息。期貨／�
 | `meta.json` | 產生時間、各類別最後一根日K日期、失敗代號、移除的未完成 K 棒 |
 | `candidates.md` / `candidates.json` | 前 15 名候選(每類最多 6 個)與完整判斷細節 |
 | `alerts.json` | 極端軌道提醒：最新一根觸及極端下軌(跌過頭)/上軌(漲過頭)的標的與趨勢解讀(也列在 candidates.md 最後) |
-| `../chips/tw_chips.csv` | 台股觀察池每日三大法人買賣超(股)與融資融券餘額(張),由 `tw-chips` workflow 每晚 21:40 更新;candidates.md 有「台股候選籌碼」表(目前僅顯示、未計分) |
+| `../chips/tw_chips.csv` | 台股觀察池每日三大法人買賣超(股)與融資融券餘額(張),由 `tw-chips` workflow 每晚 21:40 更新;candidates.md 有「台股候選籌碼」表。計分：突破且外資 5 日買超≥5% 均量 +1、投信連買≥3 日 -1,依據見 `docs/backtest_chips_2026-11.md` |
 | `screen_all.csv` | 所有分析標的的摘要 |
 | `key_symbols.json` | 加權、標普、那斯達克、費半、小那、黃金、原油、台幣、比特幣最新收盤 |
 | `bars/*_D.csv` `*_W.csv` `*_60m.csv` | 候選與關鍵指標的日K(260根)、週K(104根)、60分K(300根,台北時間)含指標 |

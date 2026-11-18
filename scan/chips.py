@@ -240,6 +240,30 @@ def features(hist: pd.DataFrame, symbol: str, avg_vol_shares: float | None, asof
     }
 
 
+def apply_score(r: dict, df: pd.DataFrame | None = None) -> None:
+    """依 backtest/chips_study 的結果調整多方分數(2024-11~2026-10 台股 176 檔，見 docs/backtest_chips_2026-11.md)。
+    只採用在 A突破/B蓄勢/D Stage2 隨機日或四個季度大多同向的訊號;其餘只標記。"""
+    c = r.get("chips")
+    if not c or r.get("direction") != "多":
+        return
+    bo = (r.get("breakout") or {}).get("found")
+    f5, ts = c.get("foreign_5d_pct_vol"), c.get("trust_streak") or 0
+    # 突破 + 外資 5 日買超 ≥ 5% 均量:+0.148R(t=1.69),四季中三季為正
+    if bo and f5 is not None and f5 >= 5:
+        r["score"] += 1
+        r["reasons"].append("突破+外資5日買超≥5%量")
+    # 投信連買 ≥ 3 日：後續偏弱(突破 -0.20R t=-2.0、蓄勢 -0.13R、Stage2 隨機日 -0.14R t=-3.0)
+    if ts >= 3:
+        r["score"] -= 1
+        r["reasons"].append(f"投信連買{ts}日(回測偏弱)")
+    # 蓄勢 + 融資 5 日增 > 5% 而股價 5 日漲 < 2%:樣本少(N=63),只標記
+    m5 = c.get("margin_5d_chg_pct")
+    if r.get("stage") == "蓄勢" and m5 is not None and m5 > 5 and df is not None and len(df) > 5:
+        px5 = float(df["Close"].iloc[-1] / df["Close"].iloc[-6] - 1)
+        if px5 < 0.02:
+            r["reasons"].append("融資增價不漲(未計分)")
+
+
 def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     ap = argparse.ArgumentParser()
