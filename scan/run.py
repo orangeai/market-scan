@@ -127,6 +127,7 @@ def main():
             if sym in by_sym and sym in enriched:
                 vol20 = float(enriched[sym]["Volume"].tail(20).mean())
                 r["chips"] = chips.features(by_sym[sym], sym, vol20)
+                chips.apply_score(r, enriched[sym])
     log.info("chips: %s rows, last date %s", len(chip_hist), chip_date)
 
     # ---- 相對強度(63 日報酬相對基準，於同類中排百分位) ---------------------
@@ -303,7 +304,7 @@ def main():
             "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
             "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
             "60分K 時間為台北時間。",
-            "chips:台股三大法人(股)與融資融券(張),由 scan.chips 每晚 21:40 更新，掃描時使用前一交易日為止的資料;目前僅顯示、未計分。",
+            "chips:台股三大法人(股)與融資融券(張),由 scan.chips 每晚 21:40 更新，掃描時使用前一交易日為止的資料;計分：突破且外資 5 日買超≥5% 均量 +1、投信連買≥3 日 -1(回測見 docs/backtest_chips_2026-11.md);其餘欄位僅供參考。",
             "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分;全部觸及上下軌的標的另列於 alerts.json 與 candidates.md 的「極端軌道提醒」。",
             "rs_lead_recent:近 5 根內出現 RS 領先(S02);突破前 10 根內出現者加 1 分。breakout_failed:突破後收盤曾跌回突破點或 EMA20(S03),僅標記不計分(回測差異不顯著)。",
         ],
@@ -320,7 +321,7 @@ def main():
                      f"{c['score']} | {c['close']} | {c['pivot']} | {c['dist_to_pivot_pct']} | "
                      f"{'、'.join(c['reasons'])} |")
     tw_c = [c for c in candidates if c.get("chips")]
-    lines += ["", f"## 台股候選籌碼(資料日期 {chip_date or '無'};法人單位：張;連買為正、連賣為負;僅供參考，未計分)", ""]
+    lines += ["", f"## 台股候選籌碼(資料日期 {chip_date or '無'};法人單位：張;連買為正、連賣為負;計分規則見 docs/backtest_chips_2026-11.md)", ""]
     if tw_c:
         lines += ["| 商品 | 外資 | 投信 | 自營 | 外資連續日 | 投信連續日 | 5日法人合計佔量% | 5日投信佔量% | 融資餘額 | 融資5日% | 券資比% |",
                   "|---|---|---|---|---|---|---|---|---|---|---|"]
