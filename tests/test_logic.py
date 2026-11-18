@@ -108,3 +108,14 @@ def test_chips_parse_and_features(monkeypatch, tmp_path):
     chips.save(h, p)
     assert len(chips.load(p)) == 8
     assert chips.features(h, "X.TW", 1000.0, asof="2026-10-05")["trust_streak"] == -3
+
+
+def test_chips_apply_score():
+    from scan import chips
+    r = {"direction": "多", "stage": "剛發動", "score": 10, "reasons": [], "breakout": {"found": True},
+         "chips": {"foreign_5d_pct_vol": 6.0, "trust_streak": 3, "margin_5d_chg_pct": 1.0}}
+    chips.apply_score(r)
+    assert r["score"] == 10 and "突破+外資5日買超≥5%量" in r["reasons"] and any("投信連買" in x for x in r["reasons"])
+    r2 = {"direction": "空", "score": 5, "reasons": [], "chips": {"trust_streak": 5}}
+    chips.apply_score(r2)
+    assert r2["score"] == 5 and not r2["reasons"]
