@@ -1,0 +1,99 @@
+{
+ "generated_at_taipei": "2026-11-21 15:58",
+ "generated_at_utc": "2026-11-21 07:58",
+ "data_source": "Yahoo Finance(yfinance),日K 為分割調整、未還原除權息",
+ "universe_sources": {
+  "tw_listed": "TWSE OpenAPI STOCK_DAY_ALL",
+  "tw_otc": "TPEx OpenAPI mainboard_quotes",
+  "us": "Wikipedia S&P 500 成分股"
+ },
+ "universe_count": 812,
+ "downloaded": 812,
+ "analysed": 379,
+ "failed_daily": [],
+ "failed_60m": [],
+ "last_bar_date_by_group": {
+  "加密貨幣": "2026-11-20",
+  "台股": "2026-11-20",
+  "外匯": "2026-11-20",
+  "指數": "2026-11-20",
+  "期貨商品": "2026-11-20",
+  "美股": "2026-11-20",
+  "美股ETF": "2026-11-20"
+ },
+ "chips_last_date": "2026-11-20",
+ "expected_last_date": {
+  "台股": "2026-11-20",
+  "美股": "2026-11-20"
+ },
+ "stale_warning": {},
+ "tw_official_patch": {
+  "note": "TWSE 1384 檔;TPEx 1002 檔",
+  "patched_count": 0
+ },
+ "partial_bars_removed": {
+  "AUDUSD=X": {
+   "date": "2026-11-21",
+   "price": 0.6619009971618652
+  },
+  "BTC-USD": {
+   "date": "2026-11-21",
+   "price": 57887.21875
+  },
+  "ETH-USD": {
+   "date": "2026-11-21",
+   "price": 1627.989990234375
+  },
+  "SOL-USD": {
+   "date": "2026-11-21",
+   "price": 67.33999633789062
+  },
+  "XRP-USD": {
+   "date": "2026-11-21",
+   "price": 0.8892999887466431
+  },
+  "BNB-USD": {
+   "date": "2026-11-21",
+   "price": 523.75
+  },
+  "DOGE-USD": {
+   "date": "2026-11-21",
+   "price": 0.05282999947667122
+  },
+  "ADA-USD": {
+   "date": "2026-11-21",
+   "price": 0.13833999633789062
+  },
+  "TRX-USD": {
+   "date": "2026-11-21",
+   "price": 0.3026040196418762
+  },
+  "AVAX-USD": {
+   "date": "2026-11-21",
+   "price": 6.269000053405762
+  },
+  "LINK-USD": {
+   "date": "2026-11-21",
+   "price": 8.319000244140625
+  }
+ },
+ "notes": [
+  "期貨、外匯、加密貨幣若最後一根日K尚未收完，已移除不納入判斷，最新價見 partial_bars_removed。",
+  "台股最新一日若 Yahoo 未更新，會以證交所/櫃買中心 OpenAPI 官方收盤資料補上(tw_official_patch)。",
+  "週K 由日K 合併(週五為一週結束);週一至週四執行時，最後一根週K 為本週未完成的週K。",
+  "外匯無真實成交量，量能相關訊號一律不適用;期貨成交量受換月影響，僅供參考。",
+  "60分K 時間為台北時間。",
+  "chips:台股三大法人(股)與融資融券(張),由 scan.chips 每晚 21:40 更新，掃描時使用前一交易日為止的資料;目前僅顯示、未計分。",
+  "extreme_rails:23 日線 ± 過去 60 日最大偏離(S06 極端軌道),可作延伸目標/超跌參考;觸及下軌的空方候選扣 2 分;全部觸及上下軌的標的另列於 alerts.json 與 candidates.md 的「極端軌道提醒」。",
+  "rs_lead_recent:近 5 根內出現 RS 領先(S02);突破前 10 根內出現者加 1 分。breakout_failed:突破後收盤曾跌回突破點或 EMA20(S03),僅標記不計分(回測差異不顯著)。"
+ ],
+ "params": {
+  "near_pivot_pct": 3,
+  "fresh_bars": 3,
+  "fresh_max_pct": 5,
+  "breakout_vol_x": 1.5,
+  "min_score": 6,
+  "top_n": 15,
+  "max_per_group": 6
+ }
+}
