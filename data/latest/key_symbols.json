@@ -2,9 +2,9 @@
  {
   "symbol": "^TWII",
   "name": "台灣加權指數",
-  "date": "2026-11-25",
-  "close": 38195.4297,
-  "chg_pct": -4.8,
+  "date": "2026-11-24",
+  "close": 40122.3516,
+  "chg_pct": 8.99,
   "partial_latest": null
  },
  {
@@ -13,7 +13,10 @@
   "date": "2026-11-24",
   "close": 7201.0898,
   "chg_pct": -0.5,
-  "partial_latest": null
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 7091.52001953125
+  }
  },
  {
   "symbol": "^IXIC",
@@ -21,7 +24,10 @@
   "date": "2026-11-24",
   "close": 23733.5391,
   "chg_pct": -1.48,
-  "partial_latest": null
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 23134.814453125
+  }
  },
  {
   "symbol": "^SOX",
@@ -29,7 +35,10 @@
   "date": "2026-11-24",
   "close": 8832.5,
   "chg_pct": -7.88,
-  "partial_latest": null
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 8381.115234375
+  }
  },
  {
   "symbol": "NQ=F",
@@ -39,7 +48,7 @@
   "chg_pct": -1.99,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 25552.25
+   "price": 25568.0
   }
  },
  {
@@ -50,7 +59,7 @@
   "chg_pct": -2.45,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 3547.699951171875
+   "price": 3531.0
   }
  },
  {
@@ -61,7 +70,7 @@
   "chg_pct": 2.35,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 81.37000274658203
+   "price": 83.52999877929688
   }
  },
  {
@@ -72,7 +81,7 @@
   "chg_pct": 2.27,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 88.06999969482422
+   "price": 90.08999633789062
   }
  },
  {
@@ -83,7 +92,7 @@
   "chg_pct": -0.32,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 33.125999450683594
+   "price": 33.220001220703125
   }
  },
  {
@@ -94,7 +103,7 @@
   "chg_pct": -2.39,
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 58424.73046875
+   "price": 59303.109375
   }
  }
 ]

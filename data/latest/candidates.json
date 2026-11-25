@@ -155,6 +155,171 @@
    "daily": "bars/ABBV_D.csv",
    "weekly": "bars/ABBV_W.csv",
    "h60": "bars/ABBV_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 297.1700134277344
+  }
+ },
+ {
+  "symbol": "2886.TW",
+  "name": "兆豐金",
+  "group": "台股",
+  "date": "2026-11-24",
+  "close": 55.0,
+  "bars": 485,
+  "has_volume": true,
+  "direction": "多",
+  "trend_long": {
+   "mode": "完整趨勢模板",
+   "passed": 7,
+   "total": 7,
+   "ok": true,
+   "partial": true,
+   "checks": {
+    "收盤>150日線且>200日線": true,
+    "150日線>200日線": true,
+    "200日線上揚(對比20日前)": true,
+    "50日線>150日線且>200日線": true,
+    "收盤>50日線": true,
+    "高於52週低點30%以上": true,
+    "距52週高點25%以內": true
+   }
+  },
+  "trend_short": {
+   "ok": false,
+   "fresh": false,
+   "checks": {
+    "收盤<50日線": false,
+    "50日線下彎(對比10日前)": false,
+    "收盤<200日線": false,
+    "高點降低(lower high)": false
+   }
+  },
+  "squeeze_on": true,
+  "squeeze_bars": 1,
+  "squeeze_fired": false,
+  "ma_tangle": true,
+  "volume_dry_up": false,
+  "range20_pct": 12.4545,
+  "vcp": {
+   "ok": false,
+   "contractions": []
+  },
+  "pocket_pivot": {
+   "recent": false,
+   "dates": []
+  },
+  "high20": 56.5,
+  "low20": 49.65,
+  "high52w": 56.5,
+  "low52w": 37.85,
+  "pct_from_52w_high": -2.6549,
+  "ma": {
+   "MA5": 52.56,
+   "MA10": 53.6,
+   "MA20": 53.68,
+   "MA50": 52.236,
+   "MA60": 51.7208,
+   "MA150": 47.3433,
+   "MA200": 45.3563
+  },
+  "rsi14": 56.335,
+  "macd": {
+   "dif": 0.1541,
+   "dea": 0.4292,
+   "hist": -0.2751
+  },
+  "kd": {
+   "k": 44.142,
+   "d": 43.8101
+  },
+  "atr14": 2.3287,
+  "vol_ratio": 1.5016,
+  "rs_lead_recent": false,
+  "extreme_rails": {
+   "m23": 53.8696,
+   "upper": 58.6348,
+   "lower": 49.7109,
+   "touch_upper": false,
+   "touch_lower": false
+  },
+  "swing_points": [
+   {
+    "date": "2026-08-13",
+    "price": 44.95,
+    "type": "L"
+   },
+   {
+    "date": "2026-09-04",
+    "price": 50.9,
+    "type": "H"
+   },
+   {
+    "date": "2026-09-11",
+    "price": 49.4,
+    "type": "L"
+   },
+   {
+    "date": "2026-09-15",
+    "price": 52.9,
+    "type": "H"
+   },
+   {
+    "date": "2026-10-02",
+    "price": 48.35,
+    "type": "L"
+   },
+   {
+    "date": "2026-11-05",
+    "price": 56.0,
+    "type": "H"
+   },
+   {
+    "date": "2026-11-06",
+    "price": 50.4,
+    "type": "L"
+   },
+   {
+    "date": "2026-11-19",
+    "price": 56.5,
+    "type": "H"
+   }
+  ],
+  "breakout": {
+   "found": false
+  },
+  "breakout_failed": false,
+  "stage": "蓄勢",
+  "pivot": 56.5,
+  "dist_to_pivot_pct": 2.7273,
+  "score": 13.0,
+  "reasons": [
+   "趨勢7/7(完整趨勢模板)",
+   "Squeeze 中(1根)",
+   "均線糾結",
+   "相對強度百分位 90.5"
+  ],
+  "chips": {
+   "date": "2026-11-25",
+   "foreign_lots": -44167,
+   "trust_lots": 33660,
+   "dealer_lots": 4665,
+   "foreign_streak": -2,
+   "trust_streak": 4,
+   "foreign_5d_pct_vol": -24.04,
+   "trust_5d_pct_vol": 42.57,
+   "inst_5d_pct_vol": 26.24,
+   "margin_bal": 1650,
+   "margin_5d_chg_pct": 45.25,
+   "short_margin_ratio_pct": 3.03
+  },
+  "rs_pct_in_group": 90.5,
+  "ret63_pct": 17.15,
+  "files": {
+   "daily": "bars/2886.TW_D.csv",
+   "weekly": "bars/2886.TW_W.csv",
+   "h60": "bars/2886.TW_60m.csv"
   }
  },
  {
@@ -301,18 +466,18 @@
    "相對強度百分位 97.2"
   ],
   "chips": {
-   "date": "2026-11-24",
-   "foreign_lots": 158,
+   "date": "2026-11-25",
+   "foreign_lots": -937,
    "trust_lots": 0,
-   "dealer_lots": -5,
-   "foreign_streak": 2,
+   "dealer_lots": -10,
+   "foreign_streak": -1,
    "trust_streak": 0,
-   "foreign_5d_pct_vol": -1.3,
+   "foreign_5d_pct_vol": -5.09,
    "trust_5d_pct_vol": 0.0,
-   "inst_5d_pct_vol": -1.36,
-   "margin_bal": 3267,
-   "margin_5d_chg_pct": 5.29,
-   "short_margin_ratio_pct": 20.84
+   "inst_5d_pct_vol": -5.16,
+   "margin_bal": 3225,
+   "margin_5d_chg_pct": 7.43,
+   "short_margin_ratio_pct": 21.05
   },
   "rs_pct_in_group": 97.2,
   "ret63_pct": 84.49,
@@ -468,6 +633,10 @@
    "daily": "bars/AAPL_D.csv",
    "weekly": "bars/AAPL_W.csv",
    "h60": "bars/AAPL_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 351.67999267578125
   }
  },
  {
@@ -628,7 +797,170 @@
   },
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 260.3999938964844
+   "price": 270.79998779296875
+  }
+ },
+ {
+  "symbol": "2618.TW",
+  "name": "長榮航",
+  "group": "台股",
+  "date": "2026-11-24",
+  "close": 48.6,
+  "bars": 485,
+  "has_volume": true,
+  "direction": "多",
+  "trend_long": {
+   "mode": "完整趨勢模板",
+   "passed": 7,
+   "total": 7,
+   "ok": true,
+   "partial": true,
+   "checks": {
+    "收盤>150日線且>200日線": true,
+    "150日線>200日線": true,
+    "200日線上揚(對比20日前)": true,
+    "50日線>150日線且>200日線": true,
+    "收盤>50日線": true,
+    "高於52週低點30%以上": true,
+    "距52週高點25%以內": true
+   }
+  },
+  "trend_short": {
+   "ok": false,
+   "fresh": false,
+   "checks": {
+    "收盤<50日線": false,
+    "50日線下彎(對比10日前)": false,
+    "收盤<200日線": false,
+    "高點降低(lower high)": false
+   }
+  },
+  "squeeze_on": false,
+  "squeeze_bars": 0,
+  "squeeze_fired": false,
+  "ma_tangle": false,
+  "volume_dry_up": false,
+  "range20_pct": 14.3004,
+  "vcp": {
+   "ok": false,
+   "contractions": []
+  },
+  "pocket_pivot": {
+   "recent": true,
+   "dates": [
+    "2026-11-24"
+   ]
+  },
+  "high20": 48.95,
+  "low20": 42.0,
+  "high52w": 48.95,
+  "low52w": 32.15,
+  "pct_from_52w_high": -0.715,
+  "ma": {
+   "MA5": 46.13,
+   "MA10": 46.84,
+   "MA20": 45.28,
+   "MA50": 43.462,
+   "MA60": 43.2767,
+   "MA150": 40.8977,
+   "MA200": 39.6505
+  },
+  "rsi14": 63.339,
+  "macd": {
+   "dif": 1.0011,
+   "dea": 1.0037,
+   "hist": -0.0026
+  },
+  "kd": {
+   "k": 58.4669,
+   "d": 59.317
+  },
+  "atr14": 1.9342,
+  "vol_ratio": 3.886,
+  "rs_lead_recent": true,
+  "extreme_rails": {
+   "m23": 44.9109,
+   "upper": 49.8674,
+   "lower": 43.5848,
+   "touch_upper": false,
+   "touch_lower": false
+  },
+  "swing_points": [
+   {
+    "date": "2026-09-15",
+    "price": 40.85,
+    "type": "L"
+   },
+   {
+    "date": "2026-09-23",
+    "price": 43.2,
+    "type": "H"
+   },
+   {
+    "date": "2026-10-08",
+    "price": 41.4,
+    "type": "L"
+   },
+   {
+    "date": "2026-10-16",
+    "price": 44.05,
+    "type": "H"
+   },
+   {
+    "date": "2026-10-22",
+    "price": 41.8,
+    "type": "L"
+   },
+   {
+    "date": "2026-11-05",
+    "price": 46.75,
+    "type": "H"
+   },
+   {
+    "date": "2026-11-06",
+    "price": 42.0,
+    "type": "L"
+   },
+   {
+    "date": "2026-11-16",
+    "price": 48.95,
+    "type": "H"
+   }
+  ],
+  "breakout": {
+   "found": false
+  },
+  "breakout_failed": false,
+  "stage": "蓄勢",
+  "pivot": 48.95,
+  "dist_to_pivot_pct": 0.7202,
+  "score": 12.0,
+  "reasons": [
+   "趨勢7/7(完整趨勢模板)",
+   "Pocket Pivot",
+   "RS 領先(未計分)",
+   "相對強度百分位 89.4"
+  ],
+  "chips": {
+   "date": "2026-11-25",
+   "foreign_lots": -3537,
+   "trust_lots": -2853,
+   "dealer_lots": 1293,
+   "foreign_streak": -2,
+   "trust_streak": -1,
+   "foreign_5d_pct_vol": -1.09,
+   "trust_5d_pct_vol": 3.47,
+   "inst_5d_pct_vol": 4.77,
+   "margin_bal": 12080,
+   "margin_5d_chg_pct": -16.92,
+   "short_margin_ratio_pct": 10.42
+  },
+  "rs_pct_in_group": 89.4,
+  "ret63_pct": 14.08,
+  "files": {
+   "daily": "bars/2618.TW_D.csv",
+   "weekly": "bars/2618.TW_W.csv",
+   "h60": "bars/2618.TW_60m.csv"
   }
  },
  {
@@ -775,6 +1107,10 @@
    "daily": "bars/ADP_D.csv",
    "weekly": "bars/ADP_W.csv",
    "h60": "bars/ADP_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 317.32501220703125
   }
  },
  {
@@ -924,6 +1260,10 @@
    "daily": "bars/AMGN_D.csv",
    "weekly": "bars/AMGN_W.csv",
    "h60": "bars/AMGN_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 469.30999755859375
   }
  },
  {
@@ -1073,6 +1413,10 @@
    "daily": "bars/COST_D.csv",
    "weekly": "bars/COST_W.csv",
    "h60": "bars/COST_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 1093.97998046875
   }
  },
  {
@@ -1220,6 +1564,10 @@
    "daily": "bars/DIS_D.csv",
    "weekly": "bars/DIS_W.csv",
    "h60": "bars/DIS_60m.csv"
+  },
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 123.66000366210938
   }
  },
  {
@@ -1379,32 +1727,32 @@
   },
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 584.75
+   "price": 587.25
   }
  },
  {
-  "symbol": "2317.TW",
-  "name": "鴻海",
+  "symbol": "2002.TW",
+  "name": "中鋼",
   "group": "台股",
-  "date": "2026-11-25",
-  "close": 206.5,
-  "bars": 486,
+  "date": "2026-11-24",
+  "close": 17.55,
+  "bars": 485,
   "has_volume": true,
   "direction": "空",
   "trend_long": {
    "mode": "完整趨勢模板",
-   "passed": 2,
+   "passed": 1,
    "total": 7,
    "ok": false,
    "partial": false,
    "checks": {
     "收盤>150日線且>200日線": false,
-    "150日線>200日線": true,
-    "200日線上揚(對比20日前)": true,
+    "150日線>200日線": false,
+    "200日線上揚(對比20日前)": false,
     "50日線>150日線且>200日線": false,
     "收盤>50日線": false,
     "高於52週低點30%以上": false,
-    "距52週高點25%以內": false
+    "距52週高點25%以內": true
    }
   },
   "trend_short": {
@@ -1422,17 +1770,17 @@
   "squeeze_fired": false,
   "ma_tangle": false,
   "volume_dry_up": false,
-  "range20_pct": 23.9709,
+  "range20_pct": 16.5242,
   "vcp": {
    "ok": false,
    "contractions": [
-    6.0,
-    3.9,
-    11.1,
-    16.2
+    3.4,
+    1.3,
+    2.3,
+    8.9
    ],
-   "pivot": 253.5,
-   "last_low": 212.5,
+   "pivot": 19.75,
+   "last_low": 18.0,
    "volume_dry_up": false,
    "pivot_date": "2026-10-29"
   },
@@ -1440,129 +1788,128 @@
    "recent": false,
    "dates": []
   },
-  "high20": 253.5,
-  "low20": 205.0,
-  "high52w": 314.0,
-  "low52w": 187.5,
-  "pct_from_52w_high": -34.2357,
+  "high20": 19.75,
+  "low20": 16.85,
+  "high52w": 21.6,
+  "low52w": 16.85,
+  "pct_from_52w_high": -18.75,
   "ma": {
-   "MA5": 213.9,
-   "MA10": 220.9,
-   "MA20": 231.05,
-   "MA50": 241.43,
-   "MA60": 243.2583,
-   "MA150": 248.2167,
-   "MA200": 239.3175
+   "MA5": 17.41,
+   "MA10": 17.88,
+   "MA20": 18.4925,
+   "MA50": 18.838,
+   "MA60": 18.8767,
+   "MA150": 18.9053,
+   "MA200": 19.1513
   },
-  "rsi14": 36.5991,
+  "rsi14": 35.2834,
   "macd": {
-   "dif": -8.7424,
-   "dea": -6.6269,
-   "hist": -2.1155
+   "dif": -0.4946,
+   "dea": -0.3345,
+   "hist": -0.1601
   },
   "kd": {
-   "k": 20.5577,
-   "d": 25.1439
+   "k": 14.9882,
+   "d": 13.4804
   },
-  "atr14": 11.2937,
-  "vol_ratio": 2.2098,
+  "atr14": 0.4257,
+  "vol_ratio": 1.2911,
   "rs_lead_recent": false,
   "extreme_rails": {
-   "m23": 233.2609,
-   "upper": 248.3043,
-   "lower": 200.913,
+   "m23": 18.6391,
+   "upper": 19.3783,
+   "lower": 16.7609,
    "touch_upper": false,
    "touch_lower": false
   },
   "swing_points": [
    {
-    "date": "2026-09-14",
-    "price": 243.5,
+    "date": "2026-09-16",
+    "price": 18.65,
     "type": "L"
    },
    {
-    "date": "2026-09-23",
-    "price": 257.0,
+    "date": "2026-09-18",
+    "price": 18.85,
     "type": "H"
    },
    {
-    "date": "2026-09-29",
-    "price": 247.0,
+    "date": "2026-09-24",
+    "price": 18.6,
     "type": "L"
    },
    {
-    "date": "2026-10-06",
-    "price": 266.5,
+    "date": "2026-10-01",
+    "price": 19.25,
     "type": "H"
    },
    {
-    "date": "2026-10-20",
-    "price": 237.0,
+    "date": "2026-10-07",
+    "price": 18.8,
     "type": "L"
    },
    {
     "date": "2026-10-29",
-    "price": 253.5,
+    "price": 19.75,
     "type": "H"
    },
    {
     "date": "2026-11-06",
-    "price": 212.5,
+    "price": 18.0,
     "type": "L"
    },
    {
-    "date": "2026-11-10",
-    "price": 247.5,
+    "date": "2026-11-12",
+    "price": 19.0,
     "type": "H"
    }
   ],
   "breakout": {
    "found": true,
-   "date": "2026-11-23",
+   "date": "2026-11-20",
    "bars_ago": 2,
-   "level": 208.0,
+   "level": 17.6,
    "volume_confirmed": true
   },
-  "breakout_failed": true,
+  "breakout_failed": false,
   "stage": "剛發動",
-  "pivot": 208.0,
-  "dist_to_pivot_pct": 0.7264,
+  "pivot": 17.6,
+  "dist_to_pivot_pct": 0.2849,
   "score": 10.0,
   "reasons": [
    "空頭結構",
    "剛轉空",
-   "放量跌破",
-   "跌破後曾站回跌破點/EMA20(未計分)"
+   "放量跌破"
   ],
   "chips": {
-   "date": "2026-11-24",
-   "foreign_lots": -888,
-   "trust_lots": 2098,
-   "dealer_lots": 802,
-   "foreign_streak": -3,
-   "trust_streak": 6,
-   "foreign_5d_pct_vol": -7.59,
-   "trust_5d_pct_vol": 1.73,
-   "inst_5d_pct_vol": -2.12,
-   "margin_bal": 49018,
-   "margin_5d_chg_pct": -4.74,
-   "short_margin_ratio_pct": 1.2
+   "date": "2026-11-25",
+   "foreign_lots": -575,
+   "trust_lots": 8,
+   "dealer_lots": -1222,
+   "foreign_streak": -9,
+   "trust_streak": 5,
+   "foreign_5d_pct_vol": -24.34,
+   "trust_5d_pct_vol": 0.34,
+   "inst_5d_pct_vol": -24.52,
+   "margin_bal": 38751,
+   "margin_5d_chg_pct": -6.02,
+   "short_margin_ratio_pct": 2.55
   },
-  "rs_pct_in_group": 57.0,
-  "ret63_pct": -15.2,
+  "rs_pct_in_group": 57.5,
+  "ret63_pct": -9.77,
   "files": {
-   "daily": "bars/2317.TW_D.csv",
-   "weekly": "bars/2317.TW_W.csv",
-   "h60": "bars/2317.TW_60m.csv"
+   "daily": "bars/2002.TW_D.csv",
+   "weekly": "bars/2002.TW_W.csv",
+   "h60": "bars/2002.TW_60m.csv"
   }
  },
  {
   "symbol": "2912.TW",
   "name": "統一超",
   "group": "台股",
-  "date": "2026-11-25",
+  "date": "2026-11-24",
   "close": 207.0,
-  "bars": 486,
+  "bars": 485,
   "has_volume": true,
   "direction": "空",
   "trend_long": {
@@ -1614,37 +1961,37 @@
    "recent": false,
    "dates": []
   },
-  "high20": 228.5,
+  "high20": 229.5,
   "low20": 199.0,
   "high52w": 250.0,
   "low52w": 199.0,
   "pct_from_52w_high": -17.2,
   "ma": {
-   "MA5": 205.5,
-   "MA10": 210.0,
-   "MA20": 213.675,
-   "MA50": 216.04,
-   "MA60": 216.175,
-   "MA150": 222.9333,
-   "MA200": 222.5275
+   "MA5": 206.9,
+   "MA10": 210.65,
+   "MA20": 214.525,
+   "MA50": 216.27,
+   "MA60": 216.4,
+   "MA150": 223.14,
+   "MA200": 222.5625
   },
   "rsi14": 40.3646,
   "macd": {
-   "dif": -3.5682,
-   "dea": -2.5213,
-   "hist": -1.0469
+   "dif": -3.5757,
+   "dea": -2.2595,
+   "hist": -1.3162
   },
   "kd": {
-   "k": 29.4671,
-   "d": 26.625
+   "k": 24.2007,
+   "d": 25.204
   },
-  "atr14": 5.1841,
-  "vol_ratio": 2.2396,
+  "atr14": 5.0444,
+  "vol_ratio": 2.1044,
   "rs_lead_recent": false,
   "extreme_rails": {
-   "m23": 215.1739,
-   "upper": 228.0652,
-   "lower": 197.413,
+   "m23": 216.0,
+   "upper": 228.8913,
+   "lower": 198.2391,
    "touch_upper": false,
    "touch_lower": false
   },
@@ -1693,7 +2040,7 @@
   "breakout": {
    "found": true,
    "date": "2026-11-23",
-   "bars_ago": 2,
+   "bars_ago": 1,
    "level": 203.0,
    "volume_confirmed": true
   },
@@ -1708,12 +2055,200 @@
    "放量跌破",
    "跌破後曾站回跌破點/EMA20(未計分)"
   ],
-  "rs_pct_in_group": 65.9,
+  "chips": {
+   "date": "2026-11-25",
+   "foreign_lots": 846,
+   "trust_lots": -1296,
+   "dealer_lots": 31,
+   "foreign_streak": 1,
+   "trust_streak": -1,
+   "foreign_5d_pct_vol": 37.3,
+   "trust_5d_pct_vol": -57.14,
+   "inst_5d_pct_vol": -18.48,
+   "margin_bal": 496,
+   "margin_5d_chg_pct": null,
+   "short_margin_ratio_pct": 0.6
+  },
+  "rs_pct_in_group": 62.0,
   "ret63_pct": -7.38,
   "files": {
    "daily": "bars/2912.TW_D.csv",
    "weekly": "bars/2912.TW_W.csv",
    "h60": "bars/2912.TW_60m.csv"
+  }
+ },
+ {
+  "symbol": "5871.TW",
+  "name": "中租-KY",
+  "group": "台股",
+  "date": "2026-11-24",
+  "close": 103.5,
+  "bars": 485,
+  "has_volume": true,
+  "direction": "空",
+  "trend_long": {
+   "mode": "完整趨勢模板",
+   "passed": 2,
+   "total": 7,
+   "ok": false,
+   "partial": false,
+   "checks": {
+    "收盤>150日線且>200日線": false,
+    "150日線>200日線": true,
+    "200日線上揚(對比20日前)": false,
+    "50日線>150日線且>200日線": false,
+    "收盤>50日線": false,
+    "高於52週低點30%以上": false,
+    "距52週高點25%以內": true
+   }
+  },
+  "trend_short": {
+   "ok": true,
+   "fresh": true,
+   "checks": {
+    "收盤<50日線": true,
+    "50日線下彎(對比10日前)": true,
+    "收盤<200日線": true,
+    "高點降低(lower high)": true
+   }
+  },
+  "squeeze_on": false,
+  "squeeze_bars": 0,
+  "squeeze_fired": false,
+  "ma_tangle": false,
+  "volume_dry_up": false,
+  "range20_pct": 13.7198,
+  "vcp": {
+   "ok": false,
+   "contractions": [
+    7.9,
+    4.5,
+    2.3,
+    9.2
+   ],
+   "pivot": 108.0,
+   "last_low": 98.1,
+   "volume_dry_up": false,
+   "pivot_date": "2026-10-29"
+  },
+  "pocket_pivot": {
+   "recent": false,
+   "dates": []
+  },
+  "high20": 108.0,
+  "low20": 93.8,
+  "high52w": 122.0588,
+  "low52w": 93.8,
+  "pct_from_52w_high": -15.2048,
+  "ma": {
+   "MA5": 98.58,
+   "MA10": 100.28,
+   "MA20": 102.465,
+   "MA50": 105.886,
+   "MA60": 107.1383,
+   "MA150": 110.6696,
+   "MA200": 109.0929
+  },
+  "rsi14": 51.1948,
+  "macd": {
+   "dif": -2.1828,
+   "dea": -2.0172,
+   "hist": -0.1657
+  },
+  "kd": {
+   "k": 40.4094,
+   "d": 30.4166
+  },
+  "atr14": 3.0415,
+  "vol_ratio": 2.7077,
+  "rs_lead_recent": false,
+  "extreme_rails": {
+   "m23": 103.013,
+   "upper": 107.9133,
+   "lower": 93.1957,
+   "touch_upper": false,
+   "touch_lower": false
+  },
+  "swing_points": [
+   {
+    "date": "2026-10-12",
+    "price": 105.0,
+    "type": "L"
+   },
+   {
+    "date": "2026-10-16",
+    "price": 110.5,
+    "type": "H"
+   },
+   {
+    "date": "2026-10-22",
+    "price": 105.5,
+    "type": "L"
+   },
+   {
+    "date": "2026-10-27",
+    "price": 108.0,
+    "type": "H"
+   },
+   {
+    "date": "2026-10-27",
+    "price": 105.5,
+    "type": "L"
+   },
+   {
+    "date": "2026-10-29",
+    "price": 108.0,
+    "type": "H"
+   },
+   {
+    "date": "2026-11-06",
+    "price": 98.1,
+    "type": "L"
+   },
+   {
+    "date": "2026-11-11",
+    "price": 106.0,
+    "type": "H"
+   }
+  ],
+  "breakout": {
+   "found": true,
+   "date": "2026-11-20",
+   "bars_ago": 2,
+   "level": 97.9,
+   "volume_confirmed": true
+  },
+  "breakout_failed": true,
+  "stage": "剛發動",
+  "pivot": 97.9,
+  "dist_to_pivot_pct": -5.4106,
+  "score": 10.0,
+  "reasons": [
+   "空頭結構",
+   "剛轉空",
+   "放量跌破",
+   "跌破後曾站回跌破點/EMA20(未計分)"
+  ],
+  "chips": {
+   "date": "2026-11-25",
+   "foreign_lots": 12824,
+   "trust_lots": -7955,
+   "dealer_lots": -31,
+   "foreign_streak": 6,
+   "trust_streak": -5,
+   "foreign_5d_pct_vol": 69.18,
+   "trust_5d_pct_vol": -46.41,
+   "inst_5d_pct_vol": 22.87,
+   "margin_bal": 4632,
+   "margin_5d_chg_pct": -20.52,
+   "short_margin_ratio_pct": 0.35
+  },
+  "rs_pct_in_group": 57.0,
+  "ret63_pct": -10.39,
+  "files": {
+   "daily": "bars/5871.TW_D.csv",
+   "weekly": "bars/5871.TW_W.csv",
+   "h60": "bars/5871.TW_60m.csv"
   }
  },
  {
@@ -1874,488 +2409,10 @@
    "daily": "bars/DIA_D.csv",
    "weekly": "bars/DIA_W.csv",
    "h60": "bars/DIA_60m.csv"
-  }
- },
- {
-  "symbol": "DX-Y.NYB",
-  "name": "美元指數",
-  "group": "外匯",
-  "date": "2026-11-24",
-  "close": 103.81,
-  "bars": 503,
-  "has_volume": false,
-  "direction": "多",
-  "trend_long": {
-   "mode": "完整趨勢模板",
-   "passed": 6,
-   "total": 7,
-   "ok": false,
-   "partial": true,
-   "checks": {
-    "收盤>150日線且>200日線": true,
-    "150日線>200日線": true,
-    "200日線上揚(對比20日前)": true,
-    "50日線>150日線且>200日線": true,
-    "收盤>50日線": true,
-    "高於52週低點30%以上": false,
-    "距52週高點25%以內": true
-   }
-  },
-  "trend_short": {
-   "ok": false,
-   "fresh": false,
-   "checks": {
-    "收盤<50日線": false,
-    "50日線下彎(對比10日前)": false,
-    "收盤<200日線": false,
-    "高點降低(lower high)": true
-   }
-  },
-  "squeeze_on": false,
-  "squeeze_bars": 0,
-  "squeeze_fired": false,
-  "ma_tangle": true,
-  "volume_dry_up": null,
-  "range20_pct": 3.3041,
-  "vcp": {
-   "ok": false,
-   "contractions": [
-    1.5,
-    1.4
-   ],
-   "pivot": 102.49,
-   "last_low": 101.1,
-   "volume_dry_up": null,
-   "pivot_date": "2026-10-28"
-  },
-  "pocket_pivot": {
-   "recent": false,
-   "dates": []
-  },
-  "high20": 104.53,
-  "low20": 101.1,
-  "high52w": 104.53,
-  "low52w": 95.55,
-  "pct_from_52w_high": -0.6888,
-  "ma": {
-   "MA5": 103.94,
-   "MA10": 103.623,
-   "MA20": 102.76,
-   "MA50": 102.0664,
-   "MA60": 101.594,
-   "MA150": 100.5217,
-   "MA200": 100.077
-  },
-  "rsi14": 63.5978,
-  "macd": {
-   "dif": 0.6172,
-   "dea": 0.5008,
-   "hist": 0.1165
-  },
-  "kd": {
-   "k": 81.369,
-   "d": 87.8359
-  },
-  "atr14": 0.5445,
-  "vol_ratio": null,
-  "rs_lead_recent": null,
-  "extreme_rails": {
-   "m23": 102.6648,
-   "upper": 104.8565,
-   "lower": 101.7574,
-   "touch_upper": false,
-   "touch_lower": false
-  },
-  "swing_points": [
-   {
-    "date": "2026-08-13",
-    "price": 100.08,
-    "type": "H"
-   },
-   {
-    "date": "2026-08-21",
-    "price": 98.56,
-    "type": "L"
-   },
-   {
-    "date": "2026-09-02",
-    "price": 99.86,
-    "type": "H"
-   },
-   {
-    "date": "2026-09-09",
-    "price": 98.6,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-14",
-    "price": 102.95,
-    "type": "H"
-   },
-   {
-    "date": "2026-10-22",
-    "price": 101.45,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-28",
-    "price": 102.49,
-    "type": "H"
-   },
-   {
-    "date": "2026-11-04",
-    "price": 101.1,
-    "type": "L"
-   }
-  ],
-  "breakout": {
-   "found": true,
-   "date": "2026-11-23",
-   "bars_ago": 1,
-   "level": 103.97,
-   "volume_confirmed": false
-  },
-  "breakout_failed": true,
-  "stage": "剛發動",
-  "pivot": 103.97,
-  "dist_to_pivot_pct": 0.1541,
-  "score": 10.0,
-  "reasons": [
-   "趨勢6/7(完整趨勢模板)",
-   "突破(無量能資料)",
-   "突破後曾跌回突破點/EMA20(未計分)",
-   "均線糾結",
-   "相對強度百分位 100.0"
-  ],
-  "rs_pct_in_group": 100.0,
-  "ret63_pct": 4.68,
-  "files": {
-   "daily": "bars/DX-Y.NYB_D.csv",
-   "weekly": "bars/DX-Y.NYB_W.csv",
-   "h60": "bars/DX-Y.NYB_60m.csv"
   },
   "partial_latest": {
    "date": "2026-11-25",
-   "price": 104.02300262451172
-  }
- },
- {
-  "symbol": "XLI",
-  "name": "工業類股 ETF",
-  "group": "美股ETF",
-  "date": "2026-11-24",
-  "close": 161.61,
-  "bars": 501,
-  "has_volume": true,
-  "direction": "空",
-  "trend_long": {
-   "mode": "完整趨勢模板",
-   "passed": 2,
-   "total": 7,
-   "ok": false,
-   "partial": false,
-   "checks": {
-    "收盤>150日線且>200日線": false,
-    "150日線>200日線": true,
-    "200日線上揚(對比20日前)": false,
-    "50日線>150日線且>200日線": false,
-    "收盤>50日線": false,
-    "高於52週低點30%以上": false,
-    "距52週高點25%以內": true
-   }
-  },
-  "trend_short": {
-   "ok": true,
-   "fresh": true,
-   "checks": {
-    "收盤<50日線": true,
-    "50日線下彎(對比10日前)": true,
-    "收盤<200日線": true,
-    "高點降低(lower high)": true
-   }
-  },
-  "squeeze_on": false,
-  "squeeze_bars": 0,
-  "squeeze_fired": false,
-  "ma_tangle": false,
-  "volume_dry_up": false,
-  "range20_pct": 10.3335,
-  "vcp": {
-   "ok": false,
-   "contractions": [
-    3.1,
-    4.5,
-    4.0,
-    6.2
-   ],
-   "pivot": 172.4,
-   "last_low": 161.74,
-   "volume_dry_up": false,
-   "pivot_date": "2026-11-03"
-  },
-  "pocket_pivot": {
-   "recent": false,
-   "dates": []
-  },
-  "high20": 172.4,
-  "low20": 155.7,
-  "high52w": 188.19,
-  "low52w": 148.93,
-  "pct_from_52w_high": -14.124,
-  "ma": {
-   "MA5": 161.294,
-   "MA10": 164.607,
-   "MA20": 166.267,
-   "MA50": 167.632,
-   "MA60": 168.4142,
-   "MA150": 174.3027,
-   "MA200": 173.209
-  },
-  "rsi14": 42.5024,
-  "macd": {
-   "dif": -1.9612,
-   "dea": -1.2764,
-   "hist": -0.6848
-  },
-  "kd": {
-   "k": 31.3202,
-   "d": 33.1222
-  },
-  "atr14": 3.6445,
-  "vol_ratio": 0.9673,
-  "rs_lead_recent": false,
-  "extreme_rails": {
-   "m23": 166.2974,
-   "upper": 170.3191,
-   "lower": 155.2235,
-   "touch_upper": false,
-   "touch_lower": false
-  },
-  "swing_points": [
-   {
-    "date": "2026-10-01",
-    "price": 166.18,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-06",
-    "price": 172.34,
-    "type": "H"
-   },
-   {
-    "date": "2026-10-15",
-    "price": 164.66,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-16",
-    "price": 169.76,
-    "type": "H"
-   },
-   {
-    "date": "2026-10-23",
-    "price": 162.97,
-    "type": "L"
-   },
-   {
-    "date": "2026-11-03",
-    "price": 172.4,
-    "type": "H"
-   },
-   {
-    "date": "2026-11-06",
-    "price": 161.74,
-    "type": "L"
-   },
-   {
-    "date": "2026-11-12",
-    "price": 171.6,
-    "type": "H"
-   }
-  ],
-  "breakout": {
-   "found": true,
-   "date": "2026-11-20",
-   "bars_ago": 2,
-   "level": 160.83,
-   "volume_confirmed": true
-  },
-  "breakout_failed": true,
-  "stage": "剛發動",
-  "pivot": 160.83,
-  "dist_to_pivot_pct": -0.4826,
-  "score": 10.0,
-  "reasons": [
-   "空頭結構",
-   "剛轉空",
-   "放量跌破",
-   "跌破後曾站回跌破點/EMA20(未計分)"
-  ],
-  "rs_pct_in_group": 41.7,
-  "ret63_pct": -10.39,
-  "files": {
-   "daily": "bars/XLI_D.csv",
-   "weekly": "bars/XLI_W.csv",
-   "h60": "bars/XLI_60m.csv"
-  }
- },
- {
-  "symbol": "XLK",
-  "name": "科技類股 ETF",
-  "group": "美股ETF",
-  "date": "2026-11-24",
-  "close": 157.09,
-  "bars": 501,
-  "has_volume": true,
-  "direction": "空",
-  "trend_long": {
-   "mode": "完整趨勢模板",
-   "passed": 4,
-   "total": 7,
-   "ok": false,
-   "partial": false,
-   "checks": {
-    "收盤>150日線且>200日線": false,
-    "150日線>200日線": true,
-    "200日線上揚(對比20日前)": true,
-    "50日線>150日線且>200日線": true,
-    "收盤>50日線": false,
-    "高於52週低點30%以上": false,
-    "距52週高點25%以內": true
-   }
-  },
-  "trend_short": {
-   "ok": true,
-   "fresh": true,
-   "checks": {
-    "收盤<50日線": true,
-    "50日線下彎(對比10日前)": true,
-    "收盤<200日線": true,
-    "高點降低(lower high)": true
-   }
-  },
-  "squeeze_on": false,
-  "squeeze_bars": 0,
-  "squeeze_fired": false,
-  "ma_tangle": false,
-  "volume_dry_up": false,
-  "range20_pct": 27.6657,
-  "vcp": {
-   "ok": false,
-   "contractions": [
-    10.7,
-    15.4
-   ],
-   "pivot": 191.55,
-   "last_low": 162.14,
-   "volume_dry_up": false,
-   "pivot_date": "2026-10-28"
-  },
-  "pocket_pivot": {
-   "recent": false,
-   "dates": []
-  },
-  "high20": 191.55,
-  "low20": 148.09,
-  "high52w": 203.25,
-  "low52w": 126.68,
-  "pct_from_52w_high": -22.7109,
-  "ma": {
-   "MA5": 158.596,
-   "MA10": 163.941,
-   "MA20": 169.64,
-   "MA50": 183.4432,
-   "MA60": 183.8217,
-   "MA150": 181.7773,
-   "MA200": 171.4733
-  },
-  "rsi14": 37.7593,
-  "macd": {
-   "dif": -7.3727,
-   "dea": -6.4925,
-   "hist": -0.8802
-  },
-  "kd": {
-   "k": 28.8196,
-   "d": 26.1105
-  },
-  "atr14": 6.9421,
-  "vol_ratio": 1.4812,
-  "rs_lead_recent": false,
-  "extreme_rails": {
-   "m23": 171.8191,
-   "upper": 183.1448,
-   "lower": 145.8548,
-   "touch_upper": false,
-   "touch_lower": false
-  },
-  "swing_points": [
-   {
-    "date": "2026-09-02",
-    "price": 182.27,
-    "type": "L"
-   },
-   {
-    "date": "2026-09-08",
-    "price": 189.08,
-    "type": "H"
-   },
-   {
-    "date": "2026-09-14",
-    "price": 182.08,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-06",
-    "price": 203.25,
-    "type": "H"
-   },
-   {
-    "date": "2026-10-22",
-    "price": 181.5,
-    "type": "L"
-   },
-   {
-    "date": "2026-10-28",
-    "price": 191.55,
-    "type": "H"
-   },
-   {
-    "date": "2026-11-05",
-    "price": 162.14,
-    "type": "L"
-   },
-   {
-    "date": "2026-11-11",
-    "price": 176.49,
-    "type": "H"
-   }
-  ],
-  "breakout": {
-   "found": true,
-   "date": "2026-11-20",
-   "bars_ago": 2,
-   "level": 159.63,
-   "volume_confirmed": true
-  },
-  "breakout_failed": true,
-  "stage": "剛發動",
-  "pivot": 159.63,
-  "dist_to_pivot_pct": 1.6169,
-  "score": 10.0,
-  "reasons": [
-   "空頭結構",
-   "剛轉空",
-   "放量跌破",
-   "跌破後曾站回跌破點/EMA20(未計分)",
-   "相對強度百分位 25.0"
-  ],
-  "rs_pct_in_group": 25.0,
-  "ret63_pct": -14.08,
-  "files": {
-   "daily": "bars/XLK_D.csv",
-   "weekly": "bars/XLK_W.csv",
-   "h60": "bars/XLK_60m.csv"
+   "price": 497.5050048828125
   }
  }
 ]

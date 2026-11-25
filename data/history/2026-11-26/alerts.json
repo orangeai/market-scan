@@ -1,0 +1,122 @@
+[
+ {
+  "symbol": "ADI",
+  "name": "Analog Devices",
+  "group": "美股",
+  "type": "跌過頭",
+  "trend": "盤整/其他",
+  "close": 312.95,
+  "rail": 339.5913,
+  "m23": 392.8104,
+  "dist_pct": -7.85,
+  "note": "超跌：觀察是否止跌"
+ },
+ {
+  "symbol": "TXN",
+  "name": "Texas Instruments",
+  "group": "美股",
+  "type": "跌過頭",
+  "trend": "盤整/其他",
+  "close": 258.44,
+  "rail": 261.6587,
+  "m23": 295.6787,
+  "dist_pct": -1.23,
+  "note": "超跌：觀察是否止跌"
+ },
+ {
+  "symbol": "PL=F",
+  "name": "鉑金期貨",
+  "group": "期貨商品",
+  "type": "跌過頭",
+  "trend": "空頭",
+  "close": 1258.7,
+  "rail": 1262.8305,
+  "m23": 1463.5043,
+  "dist_pct": -0.33,
+  "note": "空頭超跌：反彈風險高，空單勿追、可考慮回補"
+ },
+ {
+  "symbol": "HG=F",
+  "name": "銅期貨",
+  "group": "期貨商品",
+  "type": "跌過頭",
+  "trend": "空頭",
+  "close": 5.3625,
+  "rail": 5.3737,
+  "m23": 6.169,
+  "dist_pct": -0.21,
+  "note": "空頭超跌：反彈風險高，空單勿追、可考慮回補"
+ },
+ {
+  "symbol": "NXPI",
+  "name": "NXP Semiconductors",
+  "group": "美股",
+  "type": "跌過頭",
+  "trend": "盤整/其他",
+  "close": 239.4,
+  "rail": 234.3544,
+  "m23": 254.3778,
+  "dist_pct": 2.15,
+  "note": "超跌：觀察是否止跌"
+ },
+ {
+  "symbol": "8069.TWO",
+  "name": "元太",
+  "group": "台股",
+  "type": "跌過頭",
+  "trend": "空頭",
+  "close": 120.5,
+  "rail": 117.413,
+  "m23": 141.4783,
+  "dist_pct": 2.63,
+  "note": "空頭超跌：反彈風險高，空單勿追、可考慮回補"
+ },
+ {
+  "symbol": "TGT",
+  "name": "Target Corporation",
+  "group": "美股",
+  "type": "漲過頭",
+  "trend": "長多",
+  "close": 176.06,
+  "rail": 174.5083,
+  "m23": 159.6848,
+  "dist_pct": 0.89,
+  "note": "長多加速：已偏離均線，勿追高、可考慮分批停利"
+ },
+ {
+  "symbol": "SCHW",
+  "name": "Charles Schwab Corporation",
+  "group": "美股",
+  "type": "漲過頭",
+  "trend": "空頭",
+  "close": 93.91,
+  "rail": 94.2022,
+  "m23": 91.3243,
+  "dist_pct": -0.31,
+  "note": "空頭急彈到極端上軌：留意反彈結束"
+ },
+ {
+  "symbol": "2474.TW",
+  "name": "可成",
+  "group": "台股",
+  "type": "漲過頭",
+  "trend": "盤整/其他",
+  "close": 206.0,
+  "rail": 208.1304,
+  "m23": 193.3478,
+  "dist_pct": -1.02,
+  "note": "急漲：留意拉回"
+ },
+ {
+  "symbol": "3023.TW",
+  "name": "信邦",
+  "group": "台股",
+  "type": "漲過頭",
+  "trend": "空頭",
+  "close": 278.0,
+  "rail": 294.2609,
+  "m23": 265.7174,
+  "dist_pct": -5.53,
+  "note": "空頭急彈到極端上軌：留意反彈結束"
+ }
+]

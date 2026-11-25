@@ -1,0 +1,109 @@
+[
+ {
+  "symbol": "^TWII",
+  "name": "台灣加權指數",
+  "date": "2026-11-24",
+  "close": 40122.3516,
+  "chg_pct": 8.99,
+  "partial_latest": null
+ },
+ {
+  "symbol": "^GSPC",
+  "name": "標普500指數",
+  "date": "2026-11-24",
+  "close": 7201.0898,
+  "chg_pct": -0.5,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 7091.52001953125
+  }
+ },
+ {
+  "symbol": "^IXIC",
+  "name": "那斯達克指數",
+  "date": "2026-11-24",
+  "close": 23733.5391,
+  "chg_pct": -1.48,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 23134.814453125
+  }
+ },
+ {
+  "symbol": "^SOX",
+  "name": "費城半導體指數",
+  "date": "2026-11-24",
+  "close": 8832.5,
+  "chg_pct": -7.88,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 8381.115234375
+  }
+ },
+ {
+  "symbol": "NQ=F",
+  "name": "那斯達克100期貨(小那同步)",
+  "date": "2026-11-24",
+  "close": 26275.75,
+  "chg_pct": -1.99,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 25568.0
+  }
+ },
+ {
+  "symbol": "GC=F",
+  "name": "黃金期貨",
+  "date": "2026-11-24",
+  "close": 3561.8999,
+  "chg_pct": -2.45,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 3531.0
+  }
+ },
+ {
+  "symbol": "CL=F",
+  "name": "WTI原油期貨",
+  "date": "2026-11-24",
+  "close": 82.05,
+  "chg_pct": 2.35,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 83.52999877929688
+  }
+ },
+ {
+  "symbol": "BZ=F",
+  "name": "布蘭特原油期貨",
+  "date": "2026-11-24",
+  "close": 91.4,
+  "chg_pct": 2.27,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 90.08999633789062
+  }
+ },
+ {
+  "symbol": "TWD=X",
+  "name": "USD/TWD",
+  "date": "2026-11-24",
+  "close": 32.8485,
+  "chg_pct": -0.32,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 33.220001220703125
+  }
+ },
+ {
+  "symbol": "BTC-USD",
+  "name": "比特幣",
+  "date": "2026-11-24",
+  "close": 59747.7656,
+  "chg_pct": -2.39,
+  "partial_latest": {
+   "date": "2026-11-25",
+   "price": 59303.109375
+  }
+ }
+]
