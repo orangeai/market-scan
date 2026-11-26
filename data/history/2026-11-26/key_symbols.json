@@ -2,97 +2,88 @@
  {
   "symbol": "^TWII",
   "name": "台灣加權指數",
-  "date": "2026-11-24",
-  "close": 40122.3516,
-  "chg_pct": 8.99,
+  "date": "2026-11-26",
+  "close": 39151.8086,
+  "chg_pct": 2.5,
   "partial_latest": null
  },
  {
   "symbol": "^GSPC",
   "name": "標普500指數",
-  "date": "2026-11-24",
-  "close": 7201.0898,
-  "chg_pct": -0.5,
-  "partial_latest": {
-   "date": "2026-11-25",
-   "price": 7127.60986328125
-  }
+  "date": "2026-11-25",
+  "close": 7182.7798,
+  "chg_pct": -0.25,
+  "partial_latest": null
  },
  {
   "symbol": "^IXIC",
   "name": "那斯達克指數",
-  "date": "2026-11-24",
-  "close": 23733.5391,
-  "chg_pct": -1.48,
-  "partial_latest": {
-   "date": "2026-11-25",
-   "price": 23287.912109375
-  }
+  "date": "2026-11-25",
+  "close": 23585.8008,
+  "chg_pct": -0.62,
+  "partial_latest": null
  },
  {
   "symbol": "^SOX",
   "name": "費城半導體指數",
-  "date": "2026-11-24",
-  "close": 8832.5,
-  "chg_pct": -7.88,
-  "partial_latest": {
-   "date": "2026-11-25",
-   "price": 8471.828125
-  }
+  "date": "2026-11-25",
+  "close": 8774.8604,
+  "chg_pct": -0.65,
+  "partial_latest": null
  },
  {
   "symbol": "NQ=F",
   "name": "那斯達克100期貨(小那同步)",
-  "date": "2026-11-24",
-  "close": 26275.75,
-  "chg_pct": -1.99,
+  "date": "2026-11-25",
+  "close": 26100.25,
+  "chg_pct": -0.67,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 25621.75
+   "date": "2026-11-26",
+   "price": 26233.5
   }
  },
  {
   "symbol": "GC=F",
   "name": "黃金期貨",
-  "date": "2026-11-24",
-  "close": 3561.8999,
-  "chg_pct": -2.45,
+  "date": "2026-11-25",
+  "close": 3535.8,
+  "chg_pct": -0.73,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 3535.60009765625
+   "date": "2026-11-26",
+   "price": 3601.10009765625
   }
  },
  {
   "symbol": "CL=F",
   "name": "WTI原油期貨",
-  "date": "2026-11-24",
-  "close": 82.05,
-  "chg_pct": 2.35,
+  "date": "2026-11-25",
+  "close": 83.68,
+  "chg_pct": 1.99,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 83.52999877929688
+   "date": "2026-11-26",
+   "price": 84.23999786376953
   }
  },
  {
   "symbol": "BZ=F",
   "name": "布蘭特原油期貨",
-  "date": "2026-11-24",
-  "close": 91.4,
-  "chg_pct": 2.27,
+  "date": "2026-11-25",
+  "close": 94.61,
+  "chg_pct": 3.51,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 90.19999694824219
+   "date": "2026-11-26",
+   "price": 91.01000213623047
   }
  },
  {
   "symbol": "TWD=X",
   "name": "USD/TWD",
-  "date": "2026-11-24",
-  "close": 32.8485,
-  "chg_pct": -0.32,
+  "date": "2026-11-25",
+  "close": 32.921,
+  "chg_pct": 0.22,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 33.222999572753906
+   "date": "2026-11-26",
+   "price": 32.98899841308594
   }
  },
  {
@@ -102,8 +93,8 @@
   "close": 59747.7656,
   "chg_pct": -2.39,
   "partial_latest": {
-   "date": "2026-11-25",
-   "price": 59442.140625
+   "date": "2026-11-26",
+   "price": 60559.66015625
   }
  }
 ]
