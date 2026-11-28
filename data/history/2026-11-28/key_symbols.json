@@ -2,9 +2,9 @@
  {
   "symbol": "^TWII",
   "name": "台灣加權指數",
-  "date": "2026-11-26",
-  "close": 39151.8086,
-  "chg_pct": 2.5,
+  "date": "2026-11-27",
+  "close": 39308.0781,
+  "chg_pct": 0.4,
   "partial_latest": null
  },
  {
@@ -27,7 +27,7 @@
   "symbol": "^SOX",
   "name": "費城半導體指數",
   "date": "2026-11-27",
-  "close": 9186.7061,
+  "close": 9186.71,
   "chg_pct": 4.69,
   "partial_latest": null
  },
@@ -43,8 +43,8 @@
   "symbol": "GC=F",
   "name": "黃金期貨",
   "date": "2026-11-27",
-  "close": 3668.5,
-  "chg_pct": 3.75,
+  "close": 3639.6001,
+  "chg_pct": 2.94,
   "partial_latest": null
  },
  {
@@ -59,8 +59,8 @@
   "symbol": "BZ=F",
   "name": "布蘭特原油期貨",
   "date": "2026-11-27",
-  "close": 90.84,
-  "chg_pct": -3.98,
+  "close": 95.44,
+  "chg_pct": 0.88,
   "partial_latest": null
  },
  {
@@ -74,12 +74,12 @@
  {
   "symbol": "BTC-USD",
   "name": "比特幣",
-  "date": "2026-11-26",
-  "close": 60494.7109,
-  "chg_pct": 0.19,
+  "date": "2026-11-27",
+  "close": 59866.3711,
+  "chg_pct": -1.04,
   "partial_latest": {
    "date": "2026-11-28",
-   "price": 59861.53125
+   "price": 59531.80078125
   }
  }
 ]

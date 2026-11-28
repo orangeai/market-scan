@@ -60,18 +60,6 @@
   "note": "長多拉回到極端下軌：留意止跌後的買點"
  },
  {
-  "symbol": "GS",
-  "name": "Goldman Sachs",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "空頭",
-  "close": 801.03,
-  "rail": 776.1804,
-  "m23": 882.3735,
-  "dist_pct": 3.2,
-  "note": "空頭超跌：反彈風險高，空單勿追、可考慮回補"
- },
- {
   "symbol": "2618.TW",
   "name": "長榮航",
   "group": "台股",
@@ -84,76 +72,16 @@
   "note": "長多拉回到極端下軌：留意止跌後的買點"
  },
  {
-  "symbol": "SNPS",
-  "name": "Synopsys",
+  "symbol": "VRTX",
+  "name": "Vertex Pharmaceuticals",
   "group": "美股",
   "type": "跌過頭",
   "trend": "盤整/其他",
-  "close": 405.09,
-  "rail": 392.2956,
-  "m23": 449.6904,
-  "dist_pct": 3.26,
+  "close": 534.57,
+  "rail": 507.5865,
+  "m23": 541.0617,
+  "dist_pct": 5.32,
   "note": "超跌：觀察是否止跌"
- },
- {
-  "symbol": "NXPI",
-  "name": "NXP Semiconductors",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "盤整/其他",
-  "close": 242.96,
-  "rail": 234.3396,
-  "m23": 254.7274,
-  "dist_pct": 3.68,
-  "note": "超跌：觀察是否止跌"
- },
- {
-  "symbol": "TXN",
-  "name": "Texas Instruments",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "盤整/其他",
-  "close": 270.19,
-  "rail": 257.2096,
-  "m23": 295.0483,
-  "dist_pct": 5.05,
-  "note": "超跌：觀察是否止跌"
- },
- {
-  "symbol": "CRWD",
-  "name": "CrowdStrike",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "盤整/其他",
-  "close": 209.3,
-  "rail": 196.7196,
-  "m23": 234.4091,
-  "dist_pct": 6.4,
-  "note": "超跌：觀察是否止跌"
- },
- {
-  "symbol": "DE",
-  "name": "Deere & Company",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "盤整/其他",
-  "close": 641.02,
-  "rail": 597.5613,
-  "m23": 656.2952,
-  "dist_pct": 7.27,
-  "note": "超跌：觀察是否止跌"
- },
- {
-  "symbol": "AVGO",
-  "name": "Broadcom",
-  "group": "美股",
-  "type": "跌過頭",
-  "trend": "空頭",
-  "close": 300.86,
-  "rail": 278.8283,
-  "m23": 328.8304,
-  "dist_pct": 7.9,
-  "note": "空頭超跌：反彈風險高，空單勿追、可考慮回補"
  },
  {
   "symbol": "2466.TW",
@@ -168,16 +96,16 @@
   "note": "長多拉回到極端下軌：留意止跌後的買點"
  },
  {
-  "symbol": "ADI",
-  "name": "Analog Devices",
+  "symbol": "SCHW",
+  "name": "Charles Schwab Corporation",
   "group": "美股",
-  "type": "跌過頭",
-  "trend": "盤整/其他",
-  "close": 333.11,
-  "rail": 301.71,
-  "m23": 390.2904,
-  "dist_pct": 10.41,
-  "note": "超跌：觀察是否止跌"
+  "type": "漲過頭",
+  "trend": "空頭",
+  "close": 94.06,
+  "rail": 94.753,
+  "m23": 91.6374,
+  "dist_pct": -0.73,
+  "note": "空頭急彈到極端上軌：留意反彈結束"
  },
  {
   "symbol": "NG=F",
